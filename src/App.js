@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
+import './App.css';
 import apiKey from './apiKey';
 
 import MovieCard from './components/MovieCards'
 //https://api.themoviedb.org/3/movie/top_rated?api_key=8d25ce050ebd0627fcf07f8002011b71&language=en-US&page=1
-const originalMovies = [
-  {id: 1, title: 'Star Wars'},
-  {id: 2, title: 'Cest ici'},
-  {id: 3, title: 'Cnest pas absolomant fantastique'}
-]
+
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+};
 
 class App extends Component {
   state = { movies: [] }
@@ -26,15 +32,26 @@ class App extends Component {
   render() {
     const {movies} = this.state;
     return (
-      <div className="App">
+      <div>
+      <AppBar position="fixed" color="primary">
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            Photos
+          </Typography>
+        </Toolbar>
+      </AppBar>
+   
+      <div className="App movies">
       {movies.map(movie => 
        <MovieCard key={movie.id} movie={movie} />
        
       )}
        
       </div>
+    </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
+
