@@ -36,3 +36,6 @@
   padding-top:70px;
   flex-wrap: wrap;
 }
+.title{
+  flex: 1;
+}

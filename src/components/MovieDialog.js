@@ -6,12 +6,47 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CardMedia from '@material-ui/core/CardMedia';
 
 export default class MovieDialog extends React.Component {
 
 
   render() {
       const {movie, handleClose} = this.props
+
+      let title = null;
+      let content = null
+
+      if(movie){
+          title = <DialogTitle id="form-dialog-title">{movie.title}</DialogTitle>
+          content = 
+          <DialogContent>
+          <h3>Popular by: {movie.popularity}</h3>
+          <h3>Average Vote: {movie.vote_average}</h3>
+            <DialogContentText>
+                {movie.overview}
+            </DialogContentText>
+            <CardMedia
+            component="img"
+            className="movie-detail-img "
+            alt="Poster"
+            width="513"
+            height="342"
+            image={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
+            title="Poster"
+            />
+            <TextField
+                label="Release Date"
+                type="date"
+                value={movie.release_date}
+                disabled
+                
+                fullWidth
+            />
+         
+
+        </DialogContent>
+      }
     return (
       <div>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
@@ -22,28 +57,13 @@ export default class MovieDialog extends React.Component {
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send
-              updates occasionally.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-            />
-          </DialogContent>
+          {title}
+          {content}
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+            <Button onClick={handleClose} color="primary">
+              Back
             </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-            </Button>
+
           </DialogActions>
         </Dialog>
       </div>
