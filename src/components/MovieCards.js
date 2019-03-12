@@ -10,7 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import "./MovieCards.css"
 
 class MovieCard extends React.Component{
+    selectMovie = () => {
+        const{movie, selectMovie} = this.props
+        selectMovie(movie);
+    }
     render(){
+       
         const {movie} = this.props
         return (
 
@@ -34,10 +39,7 @@ class MovieCard extends React.Component{
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
-                        Share
-                        </Button>
-                        <Button size="small" color="primary">
+                        <Button size="small" color="primary" onClick={this.selectMovie}>
                         Learn More
                         </Button>
                     </CardActions>
